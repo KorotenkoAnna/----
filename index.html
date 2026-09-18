@@ -1,0 +1,185 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Porsche Classic</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500;600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root { --accent: #c9a227; }
+  * { box-sizing: border-box; }
+  body { margin: 0; background: #0c0c0d; color: #f2ede2; font-family: 'Inter', sans-serif; }
+  a { color: inherit; text-decoration: none; }
+  .nav-link:hover { color: var(--accent); }
+  .cta-btn:hover { background: #e0b23a; }
+  .ghost-btn:hover { border-color: var(--accent); color: var(--accent); }
+  .spec-card:hover { border-color: rgba(201,162,39,0.5); }
+  .nav { position: sticky; top: 0; z-index: 20; display: flex; align-items: center; justify-content: space-between; padding: 22px 6vw; background: rgba(12,12,13,0.85); backdrop-filter: blur(8px); border-bottom: 1px solid rgba(242,237,226,0.08); }
+  .logo { font-family: 'Playfair Display', serif; font-size: 20px; letter-spacing: 2px; font-weight: 600; }
+  .nav-links { display: flex; gap: 36px; font-size: 14px; letter-spacing: 0.5px; align-items: center; }
+  .nav-phone { color: var(--accent); font-weight: 600; }
+  .hero { position: relative; width: 100%; height: 92vh; min-height: 620px; display: flex; align-items: flex-end; }
+  .hero img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; z-index: 0; }
+  .hero-overlay { position: absolute; inset: 0; background: linear-gradient(180deg, rgba(12,12,13,0.15) 0%, rgba(12,12,13,0.55) 55%, #0c0c0d 100%); z-index: 1; }
+  .hero-content { position: relative; z-index: 2; padding: 0 6vw 72px; max-width: 900px; }
+  .kicker { font-size: 13px; letter-spacing: 4px; color: var(--accent); margin-bottom: 18px; text-transform: uppercase; }
+  h1 { font-family: 'Playfair Display', serif; font-size: clamp(40px, 6vw, 76px); line-height: 1.05; margin: 0 0 22px; font-weight: 600; }
+  .hero-content p { font-size: 18px; line-height: 1.6; color: rgba(242,237,226,0.75); max-width: 560px; margin: 0 0 36px; }
+  .btn-row { display: flex; gap: 16px; flex-wrap: wrap; }
+  .cta-btn { display: inline-block; background: var(--accent); color: #14120a; padding: 16px 32px; font-size: 14px; font-weight: 600; letter-spacing: 0.5px; border-radius: 2px; border: none; cursor: pointer; font-family: inherit; }
+  .ghost-btn { display: inline-block; border: 1px solid rgba(242,237,226,0.3); color: #f2ede2; padding: 16px 32px; font-size: 14px; font-weight: 600; letter-spacing: 0.5px; border-radius: 2px; }
+  .section-kicker { font-size: 13px; letter-spacing: 3px; color: var(--accent); margin-bottom: 16px; text-transform: uppercase; }
+  h2 { font-family: 'Playfair Display', serif; font-weight: 600; margin: 0; }
+  .legacy { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 32px; padding: 120px 6vw; align-items: center; }
+  .legacy-img { grid-column: span 5; }
+  .legacy-img img { width: 100%; height: 520px; object-fit: cover; border-radius: 4px; }
+  .legacy-text { grid-column: span 7; padding-left: 24px; }
+  .legacy-text h2 { font-size: clamp(30px, 3.4vw, 44px); line-height: 1.2; margin: 0 0 24px; }
+  .legacy-text p { font-size: 16px; line-height: 1.8; color: rgba(242,237,226,0.72); margin: 0 0 20px; max-width: 620px; }
+  .stat-row { display: flex; gap: 48px; margin-top: 12px; }
+  .stat-num { font-family: 'Playfair Display', serif; font-size: 32px; color: var(--accent); }
+  .stat-label { font-size: 13px; color: rgba(242,237,226,0.55); letter-spacing: 0.5px; }
+  .gallery-section { padding: 40px 6vw 120px; }
+  .section-head { text-align: center; margin-bottom: 56px; }
+  .section-head h2 { font-size: clamp(28px, 3vw, 40px); }
+  .gallery-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); grid-auto-rows: 220px; gap: 16px; }
+  .gallery-grid img { width: 100%; height: 100%; object-fit: cover; border-radius: 4px; }
+  .gallery-grid img.big { grid-column: span 2; grid-row: span 2; }
+  .specs { padding: 40px 6vw 120px; background: #121213; }
+  .specs .section-head { padding-top: 80px; }
+  .specs-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 20px; }
+  .spec-card { border: 1px solid rgba(242,237,226,0.12); border-radius: 4px; padding: 28px 24px; }
+  .spec-card .label { font-size: 13px; color: rgba(242,237,226,0.5); letter-spacing: 0.5px; margin-bottom: 10px; }
+  .spec-card .value { font-family: 'Playfair Display', serif; font-size: 22px; }
+  .contact { padding: 120px 6vw; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: 40px; }
+  .contact-info { grid-column: span 5; }
+  .contact-info h2 { font-size: clamp(28px, 3.2vw, 42px); line-height: 1.2; margin: 0 0 20px; }
+  .contact-info p { font-size: 16px; line-height: 1.7; color: rgba(242,237,226,0.7); max-width: 420px; }
+  .contact-form-wrap { grid-column: span 7; }
+  form { display: flex; flex-direction: column; gap: 18px; max-width: 520px; }
+  .form-row { display: flex; gap: 18px; }
+  .field { flex: 1; display: flex; flex-direction: column; gap: 8px; }
+  label { font-size: 13px; color: rgba(242,237,226,0.6); }
+  input, textarea { background: #17171a; border: 1px solid rgba(242,237,226,0.15); border-radius: 2px; padding: 13px 14px; color: #f2ede2; font-size: 14px; font-family: inherit; }
+  textarea { resize: vertical; }
+  .submit-btn { align-self: flex-start; }
+  footer { border-top: 1px solid rgba(242,237,226,0.08); padding: 36px 6vw; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+  footer .logo { font-size: 16px; letter-spacing: 1px; }
+  footer .fine-print { font-size: 13px; color: rgba(242,237,226,0.45); }
+  @media (max-width: 900px) {
+    .legacy, .contact { grid-template-columns: 1fr; }
+    .legacy-img, .legacy-text, .contact-info, .contact-form-wrap { grid-column: span 1; padding-left: 0; }
+    .gallery-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .gallery-grid img.big { grid-column: span 2; }
+    .specs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+    .stat-row { flex-wrap: wrap; gap: 24px; }
+    .nav-links { display: none; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <div class="logo">PORSCHE <span style="color: var(--accent);">CLASSIC</span></div>
+  <div class="nav-links">
+    <a class="nav-link" href="#legacy">Legacy</a>
+    <a class="nav-link" href="#gallery">Gallery</a>
+    <a class="nav-link" href="#specs">Specs</a>
+    <a class="nav-link" href="#contact">Contact</a>
+    <a class="nav-phone" href="tel:+380999999999">0999999999</a>
+  </div>
+</div>
+
+<div class="hero">
+  <img src="https://images.unsplash.com/photo-1597858520171-563a8e8b9925?q=80&w=2069&auto=format&fit=crop" alt="Classic Porsche 911 studio shot">
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <div class="kicker">Air-cooled &middot; Restored &middot; Numbered</div>
+    <h1>Timeless lines.<br>Untamed character.</h1>
+    <p>A hand-restored air-cooled classic, built for driving &mdash; not for standing still. This is a demo landing page.</p>
+    <div class="btn-row">
+      <a href="#contact" class="cta-btn">Book a Viewing</a>
+      <a href="#gallery" class="ghost-btn">See the Gallery</a>
+    </div>
+  </div>
+</div>
+
+<div id="legacy" class="legacy">
+  <div class="legacy-img">
+    <img src="https://images.unsplash.com/photo-1544736484-ab1711417589?q=80&w=1974&auto=format&fit=crop" alt="Classic Porsche rear detail">
+  </div>
+  <div class="legacy-text">
+    <div class="section-kicker">The Legacy</div>
+    <h2>Every panel gap tells a story.</h2>
+    <p>Sourced, stripped and rebuilt over [RESTORATION TIME], this classic keeps its factory-correct silhouette while every mechanical system underneath has been brought back to new condition. Matching numbers, original color code, no shortcuts.</p>
+    <p>Whether it's a Sunday drive or a concours lawn, this is a car built to be used the way it was designed to be &mdash; engine behind you, wheel in both hands.</p>
+    <div class="stat-row">
+      <div><div class="stat-num">[YEAR]</div><div class="stat-label">Model Year</div></div>
+      <div><div class="stat-num">2.7L</div><div class="stat-label">Flat-Six</div></div>
+      <div><div class="stat-num">210 km/h</div><div class="stat-label">Top Speed</div></div>
+    </div>
+  </div>
+</div>
+
+<div id="gallery" class="gallery-section">
+  <div class="section-head">
+    <div class="section-kicker">Gallery</div>
+    <h2>Every angle, unretouched.</h2>
+  </div>
+  <div class="gallery-grid">
+    <img class="big" src="https://images.unsplash.com/photo-1689960947007-f20efe2e19f4?q=80&w=1600&auto=format&fit=crop" alt="Porsche classic front">
+    <img src="https://images.unsplash.com/photo-1609903730357-fc7951f05910?q=80&w=1200&auto=format&fit=crop" alt="Porsche classic side">
+    <img src="https://images.unsplash.com/photo-1543796076-c8a565501995?q=80&w=1200&auto=format&fit=crop" alt="Porsche classic interior">
+    <img src="https://images.unsplash.com/photo-1601465621041-643db9cc051d?q=80&w=1200&auto=format&fit=crop" alt="Porsche classic wheel detail">
+    <img src="https://images.unsplash.com/photo-1740775236907-496bc0d93175?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="Porsche classic dashboard">
+  </div>
+</div>
+
+<div id="specs" class="specs">
+  <div class="section-head">
+    <div class="section-kicker">Specifications</div>
+    <h2>Built to spec, kept original.</h2>
+  </div>
+  <div class="specs-grid">
+    <div class="spec-card"><div class="label">ENGINE</div><div class="value">2.7L Air-Cooled Flat-Six</div></div>
+    <div class="spec-card"><div class="label">POWER</div><div class="value">175 hp</div></div>
+    <div class="spec-card"><div class="label">0&ndash;100 KM/H</div><div class="value">6.3 sec</div></div>
+    <div class="spec-card"><div class="label">TRANSMISSION</div><div class="value">5-Speed Manual</div></div>
+  </div>
+</div>
+
+<div id="contact" class="contact">
+  <div class="contact-info">
+    <div class="section-kicker">Get in Touch</div>
+    <h2>Interested in this car?</h2>
+    <p>Leave your details and our team will follow up with the full history file, service records and a private viewing time. Price on request &mdash; [YOUR PRICE].</p>
+  </div>
+  <div class="contact-form-wrap">
+    <form onsubmit="return false;">
+      <div class="form-row">
+        <div class="field">
+          <label for="pname">Name</label>
+          <input id="pname" type="text" placeholder="Jane Doe">
+        </div>
+        <div class="field">
+          <label for="pemail">Email</label>
+          <input id="pemail" type="email" placeholder="jane@example.com">
+        </div>
+      </div>
+      <div class="field">
+        <label for="pmsg">Message</label>
+        <textarea id="pmsg" rows="4" placeholder="I'd like to schedule a viewing..."></textarea>
+      </div>
+      <button type="submit" class="cta-btn submit-btn">Request Info</button>
+    </form>
+  </div>
+</div>
+
+<footer>
+  <div class="logo">PORSCHE <span style="color: var(--accent);">CLASSIC</span></div>
+  <div class="fine-print">Demo landing page &middot; images via Unsplash &middot; not an official Porsche site</div>
+</footer>
+
+</body>
+</html>
